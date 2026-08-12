@@ -1,7 +1,24 @@
 package com.management_system.employee_ms.controller;
 
-import org.springframework.web.bind.annotation.RestController;
+import com.management_system.employee_ms.model.Department;
+import com.management_system.employee_ms.service.DepartmentService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
+@RequestMapping("/api")
 public class DepartmentController {
+    public final DepartmentService deptService;
+    DepartmentController(DepartmentService deptService){
+        this.deptService=deptService;
+    }
+    @PostMapping("/add")
+    public Department add(@RequestBody Department dept){
+        return deptService.add(dept);
+    }
+    @GetMapping("/view")
+    public List<Department> view(){
+        return deptService.view();
+    }
 }
