@@ -1,5 +1,6 @@
 package com.management_system.employee_ms.service;
 
+import com.management_system.employee_ms.exception.EmployeeException;
 import com.management_system.employee_ms.model.Employee;
 import com.management_system.employee_ms.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
@@ -19,10 +20,10 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
     public Employee viewById(Long id){
-        return employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("Employee ID Not Found"));
+        return employeeRepository.findById(id).orElseThrow(() -> new EmployeeException("Employee ID Not Found"));
     }
     public Employee update(Long id,Employee emp){
-        Employee t=employeeRepository.findById(id).orElseThrow(()-> new RuntimeException("Employee Not found"));
+        Employee t=employeeRepository.findById(id).orElseThrow(()-> new EmployeeException("Employee Not found"));
         if(emp.getFirst_name()!=null){
             t.setFirst_name(emp.getFirst_name());
         }

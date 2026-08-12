@@ -2,6 +2,8 @@ package com.management_system.employee_ms.controller;
 
 import com.management_system.employee_ms.model.Employee;
 import com.management_system.employee_ms.service.EmployeeService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,8 +20,8 @@ public class EmployeeController {
         return employeeService.adding(employee);
     }
     @GetMapping("/view")
-    public List<Employee> view(){
-        return employeeService.view();
+    public ResponseEntity<List<Employee>> view(){
+        return new ResponseEntity<>(employeeService.view(), HttpStatus.OK);
     }
     @GetMapping("/view/{id}")
     public Employee viewbyId(@PathVariable Long id){
