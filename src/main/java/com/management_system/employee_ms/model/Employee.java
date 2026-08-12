@@ -22,7 +22,7 @@ public class Employee {
     private String last_name;
     @Email
     private String email;
-    @Size(max = 10)
+    @Size(max = 10,min = 10)
     private String ph_number;
     private String department;
     private String designation;

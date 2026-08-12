@@ -21,4 +21,12 @@ public class EmployeeController {
     public List<Employee> view(){
         return employeeService.view();
     }
+    @GetMapping("/view/{id}")
+    public Employee viewbyId(@PathVariable Long id){
+        return employeeService.viewById(id);
+    }
+    @PatchMapping("/update/{id}")
+    public Employee update(@PathVariable Long id,@RequestBody Employee emp){
+        return employeeService.update(id,emp);
+    }
 }

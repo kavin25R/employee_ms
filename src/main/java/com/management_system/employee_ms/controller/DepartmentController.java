@@ -1,6 +1,7 @@
 package com.management_system.employee_ms.controller;
 
 import com.management_system.employee_ms.model.Department;
+import com.management_system.employee_ms.model.Employee;
 import com.management_system.employee_ms.service.DepartmentService;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,5 +21,9 @@ public class DepartmentController {
     @GetMapping("/view")
     public List<Department> view(){
         return deptService.view();
+    }
+    @PatchMapping("/update/{id}")
+    public Department update(@PathVariable Long id,@RequestBody Department dept){
+        return deptService.update(id,dept);
     }
 }

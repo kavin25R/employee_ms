@@ -19,4 +19,11 @@ public class DepartmentService {
     public List<Department> view(){
         return deptRepository.findAll();
     }
+    public Department update(Long id,Department dept){
+        Department t=deptRepository.findById(id).orElseThrow(()->new RuntimeException("Department Not found"));
+        if(dept.getName()!=null){
+            t.setName(dept.getName());
+        }
+        return deptRepository.save(t);
+    }
 }
