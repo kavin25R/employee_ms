@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/dept")
 public class DepartmentController {
     public final DepartmentService deptService;
     DepartmentController(DepartmentService deptService){
@@ -25,5 +25,9 @@ public class DepartmentController {
     @PatchMapping("/update/{id}")
     public Department update(@PathVariable Long id,@RequestBody Department dept){
         return deptService.update(id,dept);
+    }
+    @GetMapping("/view/{id}")
+    public Department viewById(@PathVariable Long id){
+        return deptService.viewById(id);
     }
 }

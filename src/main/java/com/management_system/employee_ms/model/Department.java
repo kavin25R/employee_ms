@@ -15,4 +15,7 @@ public class Department {
     private Long id;
     @NotBlank
     private String name;
+    private String description;
+    private String deptHead;
+    private String location;
 }
