@@ -1,8 +1,8 @@
 package com.management_system.employee_ms.controller;
 
-import com.management_system.employee_ms.dto.EmployeeCreateRequest;
-import com.management_system.employee_ms.dto.EmployeeResponse;
-import com.management_system.employee_ms.dto.EmployeeUpdateRequest;
+import com.management_system.employee_ms.dto.employee.EmployeeCreateRequest;
+import com.management_system.employee_ms.dto.employee.EmployeeResponse;
+import com.management_system.employee_ms.dto.employee.EmployeeUpdateRequest;
 import com.management_system.employee_ms.service.EmployeeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
