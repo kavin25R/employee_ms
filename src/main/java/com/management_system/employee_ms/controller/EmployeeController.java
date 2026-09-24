@@ -1,7 +1,11 @@
 package com.management_system.employee_ms.controller;
 
-import com.management_system.employee_ms.model.Employee;
+import com.management_system.employee_ms.dto.EmployeeCreateRequest;
+import com.management_system.employee_ms.dto.EmployeeResponse;
+import com.management_system.employee_ms.dto.EmployeeUpdateRequest;
 import com.management_system.employee_ms.service.EmployeeService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,26 +13,61 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/emp")
+@RequestMapping("/api/employees")
+@RequiredArgsConstructor
 public class EmployeeController {
-    public static EmployeeService employeeService;
-    EmployeeController(EmployeeService employeeService){
-        this.employeeService=employeeService;
+
+    private final EmployeeService employeeService;
+
+    // CREATE
+    @PostMapping
+    public ResponseEntity<EmployeeResponse> createEmployee(
+            @Valid @RequestBody EmployeeCreateRequest request) {
+
+        EmployeeResponse response = employeeService.createEmployee(request);
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(response);
     }
-    @PostMapping("/add")
-    public Employee adding(@RequestBody Employee employee){
-        return employeeService.adding(employee);
+
+    // GET BY ID
+    @GetMapping("/{id}")
+    public ResponseEntity<EmployeeResponse> getEmployeeById(
+            @PathVariable Long id) {
+
+        return ResponseEntity.ok(
+                employeeService.getEmployeeById(id)
+        );
     }
-    @GetMapping("/view")
-    public ResponseEntity<List<Employee>> view(){
-        return new ResponseEntity<>(employeeService.view(), HttpStatus.OK);
+
+    // GET ALL
+    @GetMapping
+    public ResponseEntity<List<EmployeeResponse>> getAllEmployees() {
+
+        return ResponseEntity.ok(
+                employeeService.getAllEmployees()
+        );
     }
-    @GetMapping("/view/{id}")
-    public Employee viewbyId(@PathVariable Long id){
-        return employeeService.viewById(id);
+
+    // UPDATE
+    @PutMapping("/{id}")
+    public ResponseEntity<EmployeeResponse> updateEmployee(
+            @PathVariable Long id,
+            @Valid @RequestBody EmployeeUpdateRequest request) {
+
+        return ResponseEntity.ok(
+                employeeService.updateEmployee(id, request)
+        );
     }
-    @PatchMapping("/update/{id}")
-    public Employee update(@PathVariable Long id,@RequestBody Employee emp){
-        return employeeService.update(id,emp);
+
+    // DELETE
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteEmployee(
+            @PathVariable Long id) {
+
+        employeeService.deleteEmployee(id);
+
+        return ResponseEntity.noContent().build();
     }
 }

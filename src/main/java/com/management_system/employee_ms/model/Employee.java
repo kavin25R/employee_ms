@@ -14,8 +14,7 @@ import java.time.LocalDate;
                 @UniqueConstraint(columnNames = "email")
         }
 )
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
